@@ -1,15 +1,24 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.template import loader
-from .models import Expense
+# from django.shortcuts import render, redirect
+# from .models import Expense
 # from .forms import ExpenseForm
 
-# Create your views here.
+# def home(request):
+#     expenses = Expense.objects.all()
+#     return render(request, 'expenses/home.html', {'expenses': expenses})
 
-def expense_list(request):
-    expenses = Expense.objects.all()
-    return render(request, 'expense_list.html', {'expenses' : expenses})
+# def add_expense(request):
+#     if request.method == 'POST':
+#         form = ExpenseForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('home')
+#     else:
+#         form = ExpenseForm()
+#     return render(request, 'expenses/add_expense.html', {'form': form})
+from rest_framework import viewsets
+from .models import Expense
+from .serializers import ExpenseSerializer
 
-def expense_detail(request, pk):
-    expense = get_object_or_404(Expense, pk=pk)
-    return render(request, 'expense_detail.html', {'expense': expense})
+class ExpenseViewSet(viewsets.ModelViewSet):
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
