@@ -1,9 +1,92 @@
+{% comment %}
 <h1>Expense Tracker</h1>
 <a href="{% url 'add_expense' %}">Add Expense</a>
 <ul>
-    {% for expense in expenses %}
-        <li>{{ expense.title }} - ${{ expense.amount }} - {{ expense.category }}</li>
-    {% empty %}
-        <li>No expenses yet!</li>
-    {% endfor %}
+  {% for expense in expenses %}
+  <li>{{ expense.title }} - ${{ expense.amount }} - {{ expense.category }}</li>
+  {% empty %}
+  <li>No expenses yet!</li>
+  {% endfor %}
 </ul>
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expense Tracker</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        padding: 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      table {
+        width: 80%;
+        margin: 2rem auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      td {
+        color: #2c3e50;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Expenses</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.title }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3">No expenses found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="{% url 'add_expense' %}">
+        <button style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">
+            + Add New Expense
+        </button>
+    </a>
+    
+  </body>
+</html>
