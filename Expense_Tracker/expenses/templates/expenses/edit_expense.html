@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Expense</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        form { display: flex; flex-direction: column; width: 300px; }
+        input, button { margin-bottom: 10px; padding: 8px; }
+        button { background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Edit Expense</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" value="{{ expense.title }}" placeholder="Title" required>
+        <input type="number" name="amount" value="{{ expense.amount }}" placeholder="Amount" required>
+        <button type="submit">Update Expense</button>
+    </form>
+    <a href="{% url 'expense_list' %}">Back to List</a>
+</body>
+</html>
